@@ -1,0 +1,26 @@
+import express from 'express'
+import morgan from 'morgan'
+import userRoutes from './routes/user.routes.js'
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import connect from './db/db.js'
+
+
+const app = express();
+
+dotenv.config();
+
+connect();
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+app.use(morgan('dev'));
+
+app.use('/', userRoutes)
+
+
+export default app;
