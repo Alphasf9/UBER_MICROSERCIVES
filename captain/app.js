@@ -2,15 +2,18 @@ import express from 'express'
 import morgan from 'morgan'
 import captainRoutes from './routes/captain.routes.js'
 import dotenv from 'dotenv'
+dotenv.config();
 import cookieParser from 'cookie-parser'
 import connect from './db/db.js'
+import { connectToRabbitMq } from './service/rabbit.js';
 
 
 const app = express();
 
-dotenv.config();
 
 connect();
+
+connectToRabbitMq()
 
 
 app.use(express.json());
